@@ -966,7 +966,7 @@ int64_t GetProofOfWorkReward(int nHeight, int64_t nFees)
     int64_t nSubsidy = 55 * COIN;
     if(pindexBest->nHeight < 1)
     {
-		nSubsidy = 400000 * COIN; // Low reward to get the ball rollin' gnome sayan
+		nSubsidy = 400000 * COIN; // Premine
     }
     else if(pindexBest->nHeight < 100)
     {
