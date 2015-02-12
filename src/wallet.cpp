@@ -2339,6 +2339,10 @@ bool CWallet::FindStealthTransactions(const CTransaction& tx, mapValue_t& mapNar
 // NovaCoin: get current stake weight
 bool CWallet::GetStakeWeight(const CKeyStore& keystore, uint64_t& nMinWeight, uint64_t& nMaxWeight, uint64_t& nWeight)
 {
+    printf("GetStakeWeight : ForkTime = %li\n",STAKEFORKTIME);
+    printf("GetStakeWeight: %s\n", DateTimeStrFormat("%x %H:%M:%S", STAKEFORKTIME).c_str());
+    printf("GetStakeWeight : GetTime = %li\n",GetTime());
+    printf("GetStakeWeight: %s\n", DateTimeStrFormat("%x %H:%M:%S", GetTime()).c_str());
     // Choose coins to use
     int64_t nBalance = GetBalance();
 
@@ -2371,8 +2375,13 @@ bool CWallet::GetStakeWeight(const CKeyStore& keystore, uint64_t& nMinWeight, ui
         }
 
         int64_t nTimeWeight = GetWeight((int64_t)pcoin.first->nTime, (int64_t)GetTime());
-        CBigNum bnCoinDayWeight = CBigNum(pcoin.first->vout[pcoin.second].nValue) * nTimeWeight / COIN / (24 * 60 * 60);
+        //CBigNum bnCoinDayWeight = CBigNum(pcoin.first->vout[pcoin.second].nValue) * nTimeWeight / COIN / (24 * 60 * 60);
 
+        CBigNum bnCoinDayWeight;
+        if (GetTime() > STAKEFORKTIME)
+            bnCoinDayWeight = CBigNum(pcoin.first->vout[pcoin.second].nValue) * nTimeWeight / MILLICOIN / (24 * 60 * 60);
+        else
+            bnCoinDayWeight = CBigNum(pcoin.first->vout[pcoin.second].nValue) * nTimeWeight / COIN / (24 * 60 * 60);
         // Weight is greater than zero
         if (nTimeWeight > 0)
         {
@@ -2391,6 +2400,8 @@ bool CWallet::GetStakeWeight(const CKeyStore& keystore, uint64_t& nMinWeight, ui
             nMaxWeight += bnCoinDayWeight.getuint64();
         }
     }
+
+    printf("GetStakeWeight : nWeight = %lu\n",nWeight);
 
     return true;
 }
