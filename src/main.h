@@ -38,6 +38,7 @@ static const int64_t MIN_RELAY_TX_FEE = MIN_TX_FEE;
 static const int64_t MAX_MONEY = 5000000 * COIN; //Does not reflect actual total DarkCredits made.
 static const int64_t COIN_YEAR_REWARD = 0.12 * CENT; // 12% per year
 static const int64_t MAX_MINT_PROOF_OF_STAKE = 0.12 * COIN;	// 12% Annual PoS Interest
+static const int MODIFIER_INTERVAL_SWITCH = 200;
 
 inline bool MoneyRange(int64_t nValue) { return (nValue >= 0 && nValue <= MAX_MONEY); }
 // Threshold for nLockTime: below this value it is interpreted as block number, otherwise as UNIX timestamp.
@@ -62,6 +63,7 @@ extern std::set<std::pair<COutPoint, unsigned int> > setStakeSeen;
 extern CBlockIndex* pindexGenesisBlock;
 extern unsigned int nTargetSpacing;
 extern unsigned int nStakeMinAge;
+extern unsigned int nStakeMaxAge;
 extern unsigned int nNodeLifespan;
 extern int nCoinbaseMaturity;
 extern int nBestHeight;
