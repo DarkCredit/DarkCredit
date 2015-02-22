@@ -1289,8 +1289,8 @@ void MapPort()
 // The second name should resolve to a list of seed addresses.
 
 static const char *strDNSSeed[][2] = {
-    {"darkcredit.net", "dkcnode3.ddns.net"}, //Main DarkCredit Seed Node
-    {"dkcnode.ddns.net", "dkcnode2.ddns.net"}, //BackUp DarkCredit Seed Node
+    {"darkcredit.net", "dcxnode2.ddns.net"}, //Main DarkCredit Seed Node
+    {"dcxnode.ddns.net", "dcxnode2.ddns.net"}, //BackUp DarkCredit Seed Node
 };
 
 void ThreadDNSAddressSeed(void* parg)

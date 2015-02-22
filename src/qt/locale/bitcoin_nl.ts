@@ -801,7 +801,7 @@ Adres: %4
     <message>
         <location line="+13"/>
         <source>Tree mode</source>
-        <translation>DKC modus</translation>
+        <translation>DCX modus</translation>
     </message>
     <message>
         <location line="+16"/>
